@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coursework — Task Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- AUTH SCREEN -->
+  <div class="wrap auth-wrap" id="authScreen">
+    <header>
+      <p class="kicker">Local task tracker</p>
+      <h1><span class="prompt">&gt;</span>student@coursework:~$ login</h1>
+      <p class="sub">Sign in to sync your tasks across devices. Each account only ever sees its own tasks.</p>
+    </header>
+
+    <form class="auth-form" id="authForm">
+      <label>
+        <span>email</span>
+        <input type="email" id="emailInput" required autocomplete="email">
+      </label>
+      <label>
+        <span>password</span>
+        <input type="password" id="passwordInput" required autocomplete="current-password" minlength="6">
+      </label>
+      <div class="auth-actions">
+        <button type="submit" id="signInBtn" class="primary">Sign in</button>
+        <button type="button" id="signUpBtn" class="secondary">Create account</button>
+      </div>
+      <p class="auth-msg" id="authMsg"></p>
+    </form>
+  </div>
+
+  <!-- APP SCREEN -->
+  <div id="appScreen" style="display:none">
+    <div class="topbar">
+      <div class="topbar-inner">
+        <span class="dot"></span>
+        <span class="topbar-path">~/coursework</span>
+        <span class="sep">/</span>
+        <span>task-manager</span>
+        <span class="sep">/</span>
+        <span id="clock"></span>
+        <span class="sep" style="margin-left:auto"></span>
+        <span id="userEmail" class="user-email"></span>
+        <button id="signOutBtn" class="signout">logout</button>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <header>
+        <p class="kicker">Local task tracker</p>
+        <h1><span class="prompt">&gt;</span>student@coursework:~$ track</h1>
+        <p class="sub">Deadlines, tracked. Add a task, mark it done when it's shipped. Synced to your account.</p>
+      </header>
+
+      <div class="stats">
+        <div class="stat pending"><div class="n" id="statOpen">0</div><div class="l">Open</div></div>
+        <div class="stat overdue"><div class="n" id="statOverdue">0</div><div class="l">Overdue</div></div>
+        <div class="stat ok"><div class="n" id="statDone">0</div><div class="l">Done</div></div>
+      </div>
+
+      <form class="add-row" id="addForm">
+        <span class="prompt-sign">$</span>
+        <input type="text" id="taskInput" placeholder="add-task 'finish DBMS assignment 3'" maxlength="120" required>
+        <input type="date" id="dateInput">
+        <button type="submit">Run</button>
+      </form>
+
+      <div class="filters">
+        <button data-filter="all" class="active">all</button>
+        <button data-filter="active">active</button>
+        <button data-filter="done">done</button>
+        <span class="count" id="countLabel"></span>
+      </div>
+
+      <ul class="tasks" id="taskList"></ul>
+
+      <div class="empty" id="emptyState" style="display:none">
+        <div class="glyph">[ ]</div>
+        <p id="emptyText">No entries. Run add-task to create one.</p>
+      </div>
+
+      <footer>
+        <span>synced · powered by supabase</span>
+        <span id="buildTag">build v2.0</span>
+      </footer>
+    </div>
+  </div>
+
+  <<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
